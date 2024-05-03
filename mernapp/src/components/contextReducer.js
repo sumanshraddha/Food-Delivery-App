@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { useReducer, useContext, createContext } from "react";
 
 const CartStateContext = createContext();
 const CartDispatchContext = createContext();
@@ -21,6 +21,9 @@ const reducer = (state, action) => {
       let newArr = [...state];
       newArr.splice(action.index, 1);
       return newArr;
+    case "DROP":
+      let empArray = [];
+      return empArray;
     case "UPDATE":
       let arr = [...state];
       arr.find((food, index) => {
@@ -39,9 +42,6 @@ const reducer = (state, action) => {
         return arr;
       });
       return arr;
-    case "DROP":
-      let empArray = [];
-      return empArray;
     default:
       console.log("Error in Reducer");
   }
@@ -49,6 +49,7 @@ const reducer = (state, action) => {
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
+
   return (
     <CartDispatchContext.Provider value={dispatch}>
       <CartStateContext.Provider value={state}>
@@ -57,5 +58,6 @@ export const CartProvider = ({ children }) => {
     </CartDispatchContext.Provider>
   );
 };
+
 export const useCart = () => useContext(CartStateContext);
 export const useDispatchCart = () => useContext(CartDispatchContext);
