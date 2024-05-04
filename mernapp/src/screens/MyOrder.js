@@ -8,8 +8,6 @@ export default function MyOrder() {
   const fetchMyOrder = async () => {
     console.log(localStorage.getItem("userEmail"));
     await fetch("http://localhost:4000/api/myorderData", {
-      // credentials: 'include',
-      // Origin:"http://localhost:3000/login",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,9 +20,6 @@ export default function MyOrder() {
       await setorderData(response);
     });
 
-    // await res.map((data)=>{
-    //    console.log(data)
-    // })
   };
 
   useEffect(() => {
